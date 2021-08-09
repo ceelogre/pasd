@@ -42,3 +42,7 @@ const port = 9700
 app.listen(port, () => {
   console.log(`Server is running on ${port}`)
 } )
+
+const parseExcel = (file) => {
+  //
+}
