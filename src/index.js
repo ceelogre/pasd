@@ -27,11 +27,11 @@ app.post('/data', (req, res) => {
     }
     console.info('File moved to ', uploadPath)
     console.info((uploadPath))
-    const workbook = XLSX.readFile(file.name)
-    // get the first sheet name 
-    const sheetName = workbook.SheetNames[0]
-    const sheet = workbook.Sheets[sheetName]
-    console.info(sheet)
+    // create a workbook
+    let workbook = XLSX.readFile(uploadPath)
+    //Retrieve all the rows
+    
+    
     res.json({
       message: '6 foot'
     })
