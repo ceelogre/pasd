@@ -27,11 +27,15 @@ app.post('/data', (req, res) => {
     }
     console.info('File moved to ', uploadPath)
     console.info((uploadPath))
-    // create a workbook
-    let workbook = XLSX.readFile(uploadPath)
-    //Retrieve all the rows
-    
-    
+    const workbook = XLSX.readFile(uploadPath)
+    const sheetName = workbook.SheetNames[0]
+    const sheet = workbook.Sheets[sheetName]
+
+    // Delete unwanted properties margins and refs
+    delete (sheet['!margins'])
+    delete sheet['!ref']
+
+    const validatedSheet = validateSheet(sheet)
     res.json({
       message: '6 foot'
     })
@@ -43,6 +47,19 @@ app.listen(port, () => {
   console.log(`Server is running on ${port}`)
 } )
 
-const parseExcel = (file) => {
-  //
+const validateSheet = (sheet) => {
+  
+  for (const sheetRef in sheet) {
+        //validate each row
+        // This is a phonenumber
+        if (typeof(sheet[sheetRef].v) === Number) {
+        const validatedRow = validateRow(sheet[sheetRef])
+      }
+  }
+  return sheet
+}
+
+const validateRow = (row) => {
+  //Validate each row
+  return row
 }
